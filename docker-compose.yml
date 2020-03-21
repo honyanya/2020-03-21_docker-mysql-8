@@ -1,0 +1,22 @@
+version: "3.0"
+services:
+  db:
+    image: mysql:8.0.19
+    container_name: vertification-db
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./logs:/var/log/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./hoge.csv:/hoge.csv
+    environment:
+      MYSQL_DATABASE: sample_database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-data:
+    external:
+      name: vertification-db-data
