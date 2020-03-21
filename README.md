@@ -13,19 +13,19 @@
 ## セットアップ
 
 ```bash
-$ docker volume create --name=vertification-db-data
-vertification-db-data
+$ docker volume create --name=verification-db-data
+verification-db-data
 
 $ docker-compose up -d
 Creating network "20200321dockermysql8_default" with the default driver
-Creating vertification-db
+Creating verification-db
 
 $ docker-compose ps
       Name                   Command             State                 Ports
 ------------------------------------------------------------------------------------------
-vertification-db   docker-entrypoint.sh mysqld   Up      0.0.0.0:3306->3306/tcp, 33060/tcp
+verification-db   docker-entrypoint.sh mysqld   Up      0.0.0.0:3306->3306/tcp, 33060/tcp
 
-$ docker exec -it vertification-db cat hoge.csv
+$ docker exec -it verification-db cat hoge.csv
 "id","title"
 "1","hoge"
 "2","fuga
@@ -46,26 +46,26 @@ $ docker exec -it vertification-db cat hoge.csv
 volumes:
   db-data:
     external:
-      name: vertification-db-data
+      name: verification-db-data
 ```
 
 `volume` を作成
 
 ```bash
-$ docker volume ls | grep vertification-db-data
-local               vertification-db-data
+$ docker volume ls | grep verification-db-data
+local               verification-db-data
 ```
 
 `volume` を確認
 
 ```bash
-$ docker inspect vertification-db-data
+$ docker inspect verification-db-data
 [
     {
         "Driver": "local",
         "Labels": {},
-        "Mountpoint": "/var/lib/docker/volumes/vertification-db-data/_data",
-        "Name": "vertification-db-data",
+        "Mountpoint": "/var/lib/docker/volumes/verification-db-data/_data",
+        "Name": "verification-db-data",
         "Options": {},
         "Scope": "local"
     }
@@ -76,8 +76,8 @@ $ docker inspect vertification-db-data
 どこにあるのか  
 
 ```bash
-$ ls -al /var/lib/docker/volumes/vertification-db-data/_data
-ls: /var/lib/docker/volumes/vertification-db-data/_data: No such file or directory
+$ ls -al /var/lib/docker/volumes/verification-db-data/_data
+ls: /var/lib/docker/volumes/verification-db-data/_data: No such file or directory
 ```
 
 DockerのVM側にある  
@@ -91,7 +91,7 @@ $ screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-lin
 `Mountpoint` で指定されたディレクトリにMySQLのデータがある
 
 ```bash
-# ls /var/lib/docker/volumes/vertification-db-data/_data
+# ls /var/lib/docker/volumes/verification-db-data/_data
 #innodb_temp        ib_buffer_pool      public_key.pem
 auto.cnf            ib_logfile0         sample_database
 binlog.000001       ib_logfile1         server-cert.pem
