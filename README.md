@@ -29,6 +29,8 @@ $ docker exec -it vertification-db cat hoge.csv
 
 ## 調査ログ
 
+調査した内容を書く
+
 `docker-compose.yml` での記述
 
 ```yml
@@ -44,14 +46,14 @@ volumes:
 
 `volume` を作成
 
-```
+```bash
 $ docker volume ls | grep vertification-db-data
 local               vertification-db-data
 ```
 
 `volume` を確認
 
-```
+```bash
 $ docker inspect vertification-db-data
 [
     {
@@ -68,7 +70,7 @@ $ docker inspect vertification-db-data
 `Mountpoint` はホストには無い  
 どこにあるのか  
 
-```
+```bash
 $ ls -al /var/lib/docker/volumes/vertification-db-data/_data
 ls: /var/lib/docker/volumes/vertification-db-data/_data: No such file or directory
 ```
@@ -77,13 +79,13 @@ DockerのVM側にある
 `screen` で `tty` を指定して入る  
 入ったら `[Ctl] + [D]`
 
-```
+```bash
 $ screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty 
 ```
 
 `Mountpoint` で指定されたディレクトリにMySQLのデータがある
 
-```
+```bash
 # ls /var/lib/docker/volumes/vertification-db-data/_data
 #innodb_temp        ib_buffer_pool      public_key.pem
 auto.cnf            ib_logfile0         sample_database
@@ -98,3 +100,14 @@ client-key.pem      private_key.pem
 ```
 
 抜けるときは `[Ctr] + [A]` 後、 `[Ctr] + [K]` で `y` を指定する
+
+## 参考
+
+調査した際に見たサイトを書く
+
+- [Dockerのデータを永続化！Data Volume（データボリューム）の理解から始める環境構築入門 | Enjoy IT Life](https://nishinatoshiharu.com/docker-volume-tutorial/ )
+- [#docker の volume と mount の基本が分からない ( docker run であそぼ ) - Qiita](https://qiita.com/YumaInaura/items/53f0593234c396ce4bad )
+- [Dockerのまとめ - コンテナとボリューム編 - Qiita](https://qiita.com/kompiro/items/7474b2ca6efeeb0df80f )
+- [docker-compose MySQL8.0 のDBコンテナを作成する - Qiita](https://qiita.com/ucan-lab/items/b094dbfc12ac1cbee8cb )
+- [Dockerにおけるボリュームのマウント - logicoffee プログラミング勉強日記](https://logicoffee.hatenablog.com/entry/2018/06/21/123025 )
+- [docker-composeでno declaration was foundというエラーに遭遇 - Qiita](https://qiita.com/luccafort/items/ff6133bb8b50c0c31069 )
