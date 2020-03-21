@@ -2,7 +2,7 @@ version: "3.0"
 services:
   db:
     image: mysql:8.0.19
-    container_name: vertification-db
+    container_name: verification-db
     volumes:
       - db-data:/var/lib/mysql
       - ./logs:/var/log/mysql
@@ -19,4 +19,4 @@ services:
 volumes:
   db-data:
     external:
-      name: vertification-db-data
+      name: verification-db-data
